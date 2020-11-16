@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Raadio Buttons</title>
+  </head>
+  <body class="wrapper">
+    <section class="radio__box-outer">
+      <div class="radio__box-inner">
+        <div class="radiobuttons">
+          <input
+            id="adnroid"
+            type="radio"
+            name="os"
+            class="native-radio-button"
+          />
+          <span class="check-toggle toggle-adnroid"></span>
+
+          <input id="ios" type="radio" name="os" class="native-radio-button" />
+          <span class="check-toggle toggle-ios"></span>
+        </div>
+        <div class="input-labels">
+          <label class="input-labels__label" for="adnroid" class="radio-option"
+            >Adnroid</label
+          >
+          <label class="input-labels__label" for="ios" class="radio-option"
+            >iOS</label
+          >
+        </div>
+      </div>
+    </section>
+    <script src="app.ts"></script>
+  </body>
+</html>
