@@ -52,6 +52,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 70px;
+  overflow: hidden;
+  position: relative;
 }
 
 .native-radio-button {
@@ -63,16 +66,52 @@ body {
   overflow: hidden;
 }
 
-.native-radio-button + .check-toggle {
+.radio-fake {
+  position: relative;
+  z-index: 7;
   display: block;
   width: 100%;
   height: 70px;
-  background-color: #daf2ef;
   border-radius: 50%;
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.native-radio-button:checked + .check-toggle {
+.radio-fake--checked {
   background-color: #47c1b3;
+}
+
+.radio-fake--unchecked {
+  background-color: #daf2ef;
+}
+
+.background-animate {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+}
+
+.background-animate--checked {
+  left: 0;
+  bottom: -100px;
+  background-color: #47c1b3;
+}
+
+.background-animate--unchecked {
+  left: 0;
+  bottom: -100px;
+  background-color: #daf2ef;
+}
+
+.background-animate--delayedchecked {
+  left: 0;
+  top: -100px;
+  background-color: #47c1b3;
+}
+
+.background-animate--delayedunchecked {
+  left: 0;
+  top: -100px;
+  background-color: #daf2ef;
 }
 
 .indicator {
@@ -98,5 +137,17 @@ body {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(218, 242, 239, 0);
+  }
+}
+
+@keyframes fill {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(7);
+  }
+  100% {
+    transform: scale(1);
   }
 }

@@ -14,12 +14,26 @@
             id="adnroid"
             type="radio"
             name="os"
-            class="native-radio-button"
+            class="native-radio-button native-radio-button--adnroid"
+            checked
           />
-          <span class="check-toggle toggle-adnroid"></span>
+          <span class="radio-fake radio-fake--checked"></span>
 
-          <input id="ios" type="radio" name="os" class="native-radio-button" />
-          <span class="check-toggle toggle-ios"></span>
+          <input
+            id="ios"
+            type="radio"
+            name="os"
+            class="native-radio-button native-radio-button--ios"
+          />
+          <span class="radio-fake radio-fake--unchecked"></span>
+          <span class="background-animate background-animate--checked"></span>
+          <span class="background-animate background-animate--unchecked"></span>
+          <span
+            class="background-animate background-animate--delayedchecked"
+          ></span>
+          <span
+            class="background-animate background-animate--delayedunchecked"
+          ></span>
         </div>
         <div class="input-labels">
           <label class="input-labels__label" for="adnroid" class="radio-option"
