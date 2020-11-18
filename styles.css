@@ -66,21 +66,20 @@ body {
   overflow: hidden;
 }
 
-.radio-fake {
-  position: relative;
-  z-index: 7;
+.radio-span {
+  position: absolute;
   display: block;
   width: 100%;
   height: 70px;
   border-radius: 50%;
-  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 1s 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.radio-fake--checked {
+.radio-span--checked {
   background-color: #47c1b3;
 }
 
-.radio-fake--unchecked {
+.radio-span--unchecked {
   background-color: #daf2ef;
 }
 

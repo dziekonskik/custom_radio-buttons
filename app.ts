@@ -30,6 +30,42 @@ const pulse = (event: MouseEvent) => {
   indicatorManager(event.target, event.clientX, event.clientY);
 };
 
+const setInitialPosition = () => {
+  const checkedSpan = <HTMLElement>(
+    document.querySelector('.radio-span--checked')
+  );
+  const uncheckedSpan = <HTMLElement>(
+    document.querySelector('.radio-span--unchecked')
+  );
+  checkedSpan.style.top = '0';
+  checkedSpan.style.left = '0';
+  uncheckedSpan.style.bottom = '0';
+  uncheckedSpan.style.left = '0';
+};
+
+const performAnimation = (
+  main: HTMLElement,
+  secondary: HTMLElement,
+  parent: HTMLElement,
+  background: HTMLElement,
+  delayedBackground: HTMLElement
+): void => {
+  main.style.zIndex = '9';
+  secondary.style.zIndex = '7';
+  main.style.transform = `translateY(${
+    parent?.clientHeight - main.clientHeight
+  }px)`;
+  secondary.style.opacity = '0';
+  background.style.animation = 'fill 1.6s';
+  delayedBackground.style.animation = 'fill 1.6s 0.6s';
+  secondary.style.top = '0';
+  secondary.style.opacity = '1';
+};
+
+const styleReset = (...elements: HTMLElement[]) => {
+  [...elements].forEach((element) => element.removeAttribute('style'));
+};
+
 const handleRaiobuttonChange = (event: Event) => {
   const radioButton = <Element>event.target;
   const radioButtonParent = radioButton.parentElement;
@@ -59,33 +95,45 @@ const handleRaiobuttonChange = (event: Event) => {
     'native-radio-button--adnroid'
   );
 
+  setInitialPosition(checkedSpan, uncheckedSpan);
+
   //dlaczego jak przenosze waunek o parenta do zmiennej to ts krzyczy?
   if (iOsWasClicked && radioButtonParent !== null) {
-    checkedSpan.style.transform = `translateY(${
-      radioButtonParent?.clientHeight - checkedSpan.clientHeight
-    }px)`;
-    uncheckedSpan.style.opacity = '0';
-    uncheckedSpan.style.transform = `translateY(-${
-      radioButtonParent?.clientHeight - checkedSpan.clientHeight
-    }px)`;
-
-    uncheckedBackgroundFill.style.animation = 'fill 1.6s';
-    delayedUncheckedBackgroundFill.style.animation = 'fill 1.6s 0.6s';
-    uncheckedSpan.style.opacity = '1';
+    styleReset(
+      checkedSpan,
+      uncheckedSpan,
+      radioButtonParent,
+      uncheckedBackgroundFill,
+      delayedUncheckedBackgroundFill
+    );
+    performAnimation(
+      checkedSpan,
+      uncheckedSpan,
+      radioButtonParent,
+      uncheckedBackgroundFill,
+      delayedUncheckedBackgroundFill
+    );
   }
 
-  // if (androidWasClicked && radioButtonParent !== null) {
-  //   console.log('elo');
-  //   checkedSpan.style.transform = `translateY(-${
-  //     radioButtonParent?.clientHeight - checkedSpan.clientHeight
-  //   }px)`;
-  //   uncheckedSpan.style.transform = `translateY(${
-  //     radioButtonParent?.clientHeight - checkedSpan.clientHeight
-  //   }px)`;
-  //   checkedBackgroundFill.style.animation = 'fill 1.6s';
-  //   delayedCheckedBackgroundFill.style.animation = 'fill 1.6s 0.6s';
-  // }
+  if (androidWasClicked && radioButtonParent !== null) {
+    styleReset(
+      uncheckedSpan,
+      checkedSpan,
+      radioButtonParent,
+      checkedBackgroundFill,
+      delayedCheckedBackgroundFill
+    );
+    performAnimation(
+      uncheckedSpan,
+      checkedSpan,
+      radioButtonParent,
+      checkedBackgroundFill,
+      delayedCheckedBackgroundFill
+    );
+  }
 };
+
+setInitialPosition();
 
 [...labels].forEach((label) => label.addEventListener('click', pulse));
 [...radiobuttons].forEach((radioButton) =>
