@@ -55,11 +55,10 @@ const performAnimation = (
   main.style.transform = `translateY(${
     parent?.clientHeight - main.clientHeight
   }px)`;
-  secondary.style.opacity = '0';
+  main.style.animation = 'easeOutBounce 0.3s 0.6s';
   background.style.animation = 'fill 1.6s';
-  delayedBackground.style.animation = 'fill 1.6s 0.6s';
-  secondary.style.top = '0';
-  secondary.style.opacity = '1';
+  delayedBackground.style.animation =
+    'fill 1.6s 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
 };
 
 const styleReset = (...elements: HTMLElement[]) => {
@@ -94,8 +93,6 @@ const handleRaiobuttonChange = (event: Event) => {
   const androidWasClicked = radioButton.classList.contains(
     'native-radio-button--adnroid'
   );
-
-  setInitialPosition(checkedSpan, uncheckedSpan);
 
   //dlaczego jak przenosze waunek o parenta do zmiennej to ts krzyczy?
   if (iOsWasClicked && radioButtonParent !== null) {
